@@ -1,0 +1,60 @@
+class Solution {
+public:
+    
+    //kaydane's algo
+    int maxSubArray(vector<int>& nums) {
+        if(nums.size()==0)
+            return 0;
+        if(nums.size()==1)
+            return nums[0];
+        
+        int currMax=nums[0], maxTillNow=nums[0];
+        for(int i=1;i<nums.size();i++)
+        {
+            currMax=max(nums[i],currMax+nums[i]);
+            if(currMax>maxTillNow)
+                maxTillNow=currMax;
+        }
+        return maxTillNow;
+    }
+    
+    // Divide and conquer approach
+   /* 
+    int leftRightCombinedMax(vector<int> & arr, int l , int mid, int h)
+    {
+        int leftSum = 0, rightSum = 0;
+        int leftmax=arr[mid], rightmax=arr[mid+1];
+        for(int i=mid;i>=l;i--)
+        {
+            leftSum+=arr[i];
+            leftmax = max(leftmax,leftSum);
+        }
+        for(int i=mid+1;i<=h;i++)
+        {
+            rightSum+=arr[i];
+            rightmax=max(rightmax,rightSum);
+        }
+        return leftmax + rightmax;
+    }
+    
+    int maxSubArrayRec(vector<int> & arr, int l, int h)
+    {
+        if(l<h)
+        {
+         int mid= l + (h-l)/2;
+         int left = maxSubArrayRec(arr, l, mid);
+         int right = maxSubArrayRec(arr, mid+1, h);
+         int sum = leftRightCombinedMax(arr, l, mid, h);
+            int maxSum = max(left, max(right, sum));
+            //cout<<"left "<<left<<" right "<<right<<" combined "<<sum<<" max "<<maxSum<<endl;
+         
+            return maxSum;
+        }
+        else
+            return arr[l]; // only one element.
+    }
+    
+    int maxSubArray(vector<int>& nums) {
+      return  maxSubArrayRec(nums, 0, nums.size()-1);
+    }*/
+};

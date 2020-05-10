@@ -1,0 +1,94 @@
+class Solution {
+public:
+    
+    string longestCommonPrefix(vector<string>& strs) {
+        if(strs.size()==0)
+            return "";
+        
+        if(strs.size()==1)
+            return strs[0];
+        
+        string prefix=strs[0];
+        
+        for(int i=1;i<strs.size();i++)
+        {
+            int j=0;
+            int n=strs[i].length();
+            int m=prefix.length();
+            while(j<n && j<m && strs[i][j]==prefix[j])
+            {
+                j++;      
+            }
+            prefix=prefix.substr(0,j);
+                if(prefix.empty())
+                    return "";
+            }
+        return prefix;
+        }
+        
+    
+    //trie approach
+    /*
+    struct node 
+    {
+        public:
+        
+        bool isEndOfWord;
+        int freq;
+        map<char,node*> mp;
+        node()
+        {
+            freq=0;
+            isEndOfWord=false;
+        }
+    };
+    
+    node * createTrie(vector<string>& s)
+    {
+        node * root= new node();
+        node * temp;
+        int size= s.size();
+        for(int i=0;i<size;i++)
+        {
+            temp=root;
+            int len=s[i].length();
+            for(int j=0;j<len;j++)
+            {
+                if(temp->mp.find(s[i][j])==temp->mp.end())
+                {
+                    temp->mp[s[i][j]]=new node();
+                }
+                temp=temp->mp[s[i][j]];
+                temp->freq++;
+            }
+            temp->isEndOfWord=true;
+        }
+        return root;
+    }
+    
+    string findLongestCommonPrefixUtil(node*trie, int numOfWords)
+    {
+        string res;
+        for(auto &temp:trie->mp)
+        {
+            if(temp.second->freq==numOfWords)
+            {
+                res.push_back(temp.first);
+                res += findLongestCommonPrefixUtil(temp.second,numOfWords);
+            }
+        }
+        return res;
+        
+    }
+    
+    string longestCommonPrefix(vector<string>& strs) {
+        if(strs.size()==0)
+            return "";
+        if(strs.size()==1)
+            return strs[0];
+        
+        node * trie = createTrie(strs);
+    
+        return findLongestCommonPrefixUtil(trie,strs.size());
+    }*/
+};

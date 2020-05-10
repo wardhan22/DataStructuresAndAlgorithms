@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int n=s.length()-1;
+        int wordlength=0;
+       // bool flag=false;
+        while(n>=0)
+        {
+            if(s[n]==' ')
+            {
+                if(wordlength>0)
+                {
+                break;
+                }
+            }
+            else
+            {
+            wordlength++;
+            }
+            n--;
+            
+        }
+        
+        return wordlength;
+    }
+};

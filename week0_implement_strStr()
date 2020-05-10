@@ -1,0 +1,77 @@
+class Solution {
+public:
+    
+    int checkIfNeedlePresentInHaystack(string haystack, string needle, int *arr)
+    {
+        int index=-1;
+        int i=0,j=0;
+        int n = haystack.length();
+        int m = needle.length();
+        while(i<n && j<m)
+        {
+            if(haystack[i]==needle[j])
+            {
+                i++;j++;
+            }
+            else
+            {
+                if(j==0)
+                    i++;
+                else
+                    j=arr[j-1];
+            }
+        }
+        if(j==m)
+        {
+            index=i-j;
+        }
+        return index;
+    }
+    
+    void createPrefixSuffixArray(string s, int *arr)
+    {
+        int j=0;
+        for(int i=1;i<s.length();i++)
+        {
+            if(s[i]==s[j])
+            {
+                arr[i]=j+1;
+                j++;
+            }
+            else
+            {
+                while(j>0 && s[j]!=s[i])
+                {
+                    j=arr[j-1];
+                }
+                if(s[j]!=s[i])
+                {
+                    arr[i]=0;
+                }
+                else
+                {
+                    arr[i]=j+1;
+                    j++;
+                }
+            }
+        }
+    }
+    //"mississippi"
+//"issip"
+    int strStr(string haystack, string needle) {
+        
+        if(needle.length()==0)
+            return 0;
+        if(haystack.length()==0)
+            return -1;
+        int arr[needle.length()];
+        for(int i=0;i<needle.length();i++)
+            arr[i]=0;
+      createPrefixSuffixArray(needle,arr); 
+      /*  for(int i=0;i<needle.length();i++)
+            cout<<arr[i]<<" ";*/
+        
+        return checkIfNeedlePresentInHaystack(haystack,needle,arr);
+        
+    }
+};

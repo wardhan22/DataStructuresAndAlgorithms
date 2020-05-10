@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+     
+     /*   int n=nums.size();
+        int i=0;
+        int index=0;
+        while(i<n)
+        {
+            if(nums[i]!=val)
+            {
+                nums[index]=nums[i];
+                index++;
+            }
+            i++;
+        }
+        return index;*/
+        
+        int i = 0;
+    int n = nums.size();
+    while (i < n) {
+        if (nums[i] == val) {
+            nums[i] = nums[n - 1];
+            // reduce array size by one
+            n--;
+        } else {
+            i++;
+        }
+    }
+    return n;
+    }
+};

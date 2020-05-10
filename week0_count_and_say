@@ -1,0 +1,66 @@
+class Solution {
+public:
+    /*string FreqVal(int freq, int val)
+    {
+        return to_string(freq)+to_string(val);
+    }
+    string countAndSay(int n) {
+        if(n==1)
+            return "1";
+        string res="";
+        string temp = countAndSay(n-1);
+        int freq = 0;
+        int val = 0;
+        for(int i=0;i<temp.length();i++)
+        {
+            freq=0;
+            val=temp[i]-'0';
+            freq++;
+            if(i+1<temp.length() && temp[i+1]==temp[i])
+            {
+               int j=i+1;
+                while(temp[j]==temp[i])
+                {
+                    freq++;
+                    j++;
+                }
+                i=j-1;
+            }
+            res+= FreqVal(freq,val);
+        }   
+        return res;
+    }*/
+    
+    string countAndSay(int n) {
+        queue<int> q;
+        if(n>0)
+        {
+            q.push(1);
+            for(int i=1;i<n;i++)
+            {
+                int size = q.size();
+                while(size>0)
+                {
+                    int val = q.front();
+                    int freq = 0;
+                    while(val==q.front() && size>0)
+                    {
+                        freq++;
+                        q.pop();
+                        size--;
+                    }
+                    q.push(freq);
+                    q.push(val);
+                }
+            }
+        }
+            stringstream ss;
+            while(!q.empty())
+            {
+                ss<<q.front();
+                q.pop();
+            }
+            
+            return ss.str();
+    }
+};
