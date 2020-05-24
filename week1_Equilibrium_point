@@ -1,0 +1,46 @@
+using namespace std;
+
+void equilibriumPoint(int *arr, int n)
+{
+    if(n==1)
+    {
+        cout<<n<<endl;
+        return;
+    }
+    long long TotalSum=0,leftSum=0,rightSum=0;
+    int eqPoint=-1;
+    
+    for(int i=0;i<n;i++)
+    TotalSum+=arr[i];
+    
+    for(int i=0;i<n;i++)
+    {
+        rightSum=TotalSum-arr[i];
+        if(leftSum==rightSum)
+        {
+            eqPoint=i+1;
+            break;
+        }
+        else
+        {
+            leftSum+=arr[i];
+            TotalSum-=arr[i];
+        }
+    }
+    cout<<eqPoint<<endl;   
+}
+
+int main() {
+	int t,n;
+	cin>>t;
+	while(t--)
+	{
+	    cin>>n;
+	    int *arr = new int[n];
+	    for(int i=0;i<n;i++)
+	    cin>>arr[i];
+	    equilibriumPoint(arr,n);
+	    delete arr;
+	}
+	return 0;
+}

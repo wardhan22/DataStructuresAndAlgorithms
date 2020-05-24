@@ -1,0 +1,40 @@
+using namespace std;
+int findSqrt(long long int n)
+{
+    long long int low=1;
+    long long int high=n;
+    long long int mid;
+    long long int res=0;
+    while(high-low>1)
+    {
+        mid=low+(high-low)/2;
+        if(mid*mid == n)
+        {
+            return mid;
+        }
+        else if(mid*mid > n)
+        {
+            high=mid;
+        }
+        else
+        {
+            res=mid;
+            low= mid;
+            
+        }
+    }
+    return res;
+}
+int main()
+ {
+	int t;
+	cin>>t;
+	long long int n;
+	while(t--)
+	{
+	    cin>>n;
+	    cout<<findSqrt(n-1)<<endl; // n-1 because have to print the number of integers less than N
+	    /*cout<<(int)sqrt(n-1)<<endl;*/
+	}
+	return 0;
+}
