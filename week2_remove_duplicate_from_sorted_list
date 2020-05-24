@@ -1,0 +1,36 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+/*Runtime: 8 ms, faster than 98.94% of C++ online submissions for Remove Duplicates from Sorted List.
+Memory Usage: 11 MB, less than 5.66% of C++ online submissions for Remove Duplicates from Sorted List.*/
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        struct ListNode * temp=head;
+        struct ListNode * next=nullptr;
+        if(!head)
+            return head;
+        if(head->next==nullptr)
+            return head;
+        while(temp && temp->next)
+        {
+            if(temp->val==temp->next->val)
+            {
+                auto ptr= temp->next;
+                temp->next=temp->next->next;
+                delete ptr;
+            }
+            else
+            temp=temp->next;
+        }
+        return head;
+        
+    }
+};

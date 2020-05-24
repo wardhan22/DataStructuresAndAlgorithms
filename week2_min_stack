@@ -1,0 +1,74 @@
+/*Runtime: 104 ms
+Memory Usage: 16.3 MB*/
+
+class MinStack {
+public:
+    stack<int> aux_st;
+    stack<int> s;
+    /** initialize your data structure here. */
+    MinStack() {
+        
+    }
+    
+    void push(int x) {
+        if(s.empty())
+    {
+        s.push(x);
+        
+        aux_st=stack<int>();
+        aux_st.push(x);
+    }
+    else
+    {
+        s.push(x);
+        if(x<=aux_st.top())
+        {
+            aux_st.push(x);
+        }
+    }
+    }
+    
+    void pop() {
+         if(s.empty())
+    return ;
+    else
+    {
+        if(s.top()==aux_st.top())
+        {
+            aux_st.pop();
+        }
+        
+        s.pop();
+       
+    }
+    }
+    
+    int top() {
+     if(s.empty())
+         return -1;
+        else
+            return s.top();
+    }
+    
+    int getMin() {
+        if(s.empty())
+    {
+        aux_st=stack<int>();
+    }
+    if(!aux_st.empty())
+    {
+    return aux_st.top();
+    }
+    else 
+    return -1;
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(x);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */

@@ -1,0 +1,35 @@
+class Solution {
+public:
+    // time limit exceeded // O(2^n)
+    /*int findFibonaci(int i, int n)
+    {
+        if(i>n)
+            return 0;
+        if(i==n)
+            return 1;
+        return findFibonaci(i+1, n) + findFibonaci(i+2,n);
+    }
+    int climbStairs(int n) {
+     //using recursion
+        return findFibonaci(0,n);
+        
+    }*/
+    
+    // using fibonacci technique
+    /*Runtime: 0 ms, faster than 100.00% of C++ online submissions for Climbing Stairs.
+    Memory Usage: 6.1 MB, less than 100.00% of C++ online submissions for Climbing Stairs.*/
+    int climbStairs(int n)
+    {
+        if(n==1)
+            return 1;
+        int first=1;
+        int second = 2;
+        for(int i=3;i<=n;i++)
+        {
+            int next = first+second;
+            first=second;
+            second= next;
+        }
+        return second; // stores the nth Fibonacci
+    }
+};
