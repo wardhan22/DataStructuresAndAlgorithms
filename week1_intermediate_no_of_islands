@@ -1,0 +1,52 @@
+
+/* Runtime: 48 ms, faster than 9.52% of C++ online submissions for Number of Islands.
+Memory Usage: 9.5 MB, less than 100.00% of C++ online submissions for Number of Islands.*/
+
+class Solution {
+public:
+    void DFS(vector<vector<char>>& arr, int i, int j, int row, int col, bool &isIslandFound ){
+        if(i>=0 && i<row && j>=0 && j<col)
+        {
+            if(arr[i][j]=='0' || arr[i][j]=='2')
+            {
+                return;
+            }
+            else
+            {
+                arr[i][j]='2';
+                DFS(arr,i+1,j,row,col,isIslandFound);
+                DFS(arr,i-1,j,row,col,isIslandFound);
+                DFS(arr,i,j+1,row,col,isIslandFound);
+                DFS(arr,i,j-1,row,col,isIslandFound);
+                isIslandFound=true;
+            }
+        }
+        else 
+            return;
+    }
+    
+    int numIslands(vector<vector<char>>& grid) {
+        int n = grid.size();
+        if(n==0)
+            return 0;
+        int m = grid[0].size();
+        int res=0;
+        bool isIslandFound=false;
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                isIslandFound=false;
+                if(grid[i][j]=='1')
+                {
+                DFS(grid,i,j,n,m,isIslandFound);
+                if(isIslandFound)
+                    res= res +1;
+                }
+            }
+        }
+        return res;
+        
+    }
+};

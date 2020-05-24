@@ -1,0 +1,36 @@
+/*Runtime: 8 ms, faster than 52.97% of C++ online submissions for Trapping Rain Water.
+Memory Usage: 14.1 MB, less than 5.06% of C++ online submissions for Trapping Rain Water.*/
+
+
+/*Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.*/
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        // to get the water at index i we need to cal 
+        // min(max(leftofi ), max(rightofi)) - height[i]
+           int n = height.size();
+        if(n<3)
+    return 0;
+    int i=0, j=n-1;
+    int lmax=height[0];
+    int rmax=height[n-1];
+    long long int totalWater=0;
+    while(i<=j)
+    {
+        lmax= max(lmax , height[i]);
+        rmax=max(rmax,height[j]);
+        if(lmax<=rmax)
+        {
+            totalWater += lmax-height[i]; //min(lmax, rmax)
+            i++;
+        }
+        else
+        {
+            totalWater += rmax-height[j];
+            j--;
+        }
+    }
+    return totalWater;
+    }
+};
